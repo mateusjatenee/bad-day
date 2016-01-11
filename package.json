@@ -5,6 +5,7 @@
     "laravel-elixir-stylus": "^1.0.1"
   },
   "dependencies": {
+    "bootstrap": "^4.0.0-alpha.2",
     "bootstrap-sass": "^3.0.0",
     "laravel-elixir": "^4.0.0",
     "vue": "^1.0.13"
