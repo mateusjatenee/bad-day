@@ -47,6 +47,7 @@
         <h2 class="share-story">
         Share your story with us. Read other stories.</h2>
         <p><a class="btn btn-primary btn-lg" href="{{ route('facebook.login') }}" role="button"><i class="fa fa-facebook"></i> Login with Facebook</a></p>
+        <p><a href="#" class="login--conventionally">or login conventionally</a>
       </div>
     </div>
 
