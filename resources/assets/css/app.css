@@ -20,5 +20,8 @@ body {
     margin: 2rem 0 2rem 0;
   }
 }
+.btn {
+  transition: all 0.2s;
+}
 
 /*# sourceMappingURL=app.css.map */

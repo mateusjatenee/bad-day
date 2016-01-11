@@ -45,7 +45,7 @@
         </h1>
         <h2 class="share-story">
         Share your story with us. Read other stories.</h2>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button"><i class="fa fa-facebook"></i> Login with Facebook</a></p>
       </div>
     </div>
 
