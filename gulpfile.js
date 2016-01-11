@@ -22,5 +22,6 @@ elixir(function(mix) {
     	    	'bootstrap.css',
      	    	'app.css'
     	    	], 'public/css/app.css')
-          .version('public/css/app.css');
+    	    .scripts(['bootstrap/bootstrap.js', 'vue/vue.js'], 'public/js/app.js')
+          .version(['public/css/app.css', 'public/js/app.js']);
 });
