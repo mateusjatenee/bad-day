@@ -11,10 +11,6 @@
 |
  */
 
-Route::get('/', function () {
-    return view('home.index');
-});
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -26,11 +22,16 @@ Route::get('/', function () {
 |
  */
 
-Route::get('auth/facebook', 'Auth\AuthController@redirectToProvider');
-Route::get('auth/facebook/callback', 'Auth\AuthController@handleProviderCallback');
-
 Route::group(['middleware' => 'web'], function () {
+
+    Route::get('/', function () {
+        return view('home.index');
+    });
+
     Route::auth();
 
     Route::get('/home', 'HomeController@index');
+
+    Route::get('auth/facebook', 'Auth\OAuthController@redirectToProvider')->name('facebook.login');
+    Route::get('auth/facebook/callback', 'Auth\OAuthController@handleProviderCallback');
 });
