@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Jumbotron Template for Bootstrap</title>
+    <title>If you're having a bad day</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
@@ -39,9 +39,10 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron hero-banner">
       <div class="container vertical-center">
+      <h2 class="share-story">
+          Feeling a little down{{ Auth::check() ? ', '.Auth::user()->name : '' }}?
         <h1 class="display-3 nice-phrase">
-          Feeling a little down? <br>
-          Let's <span>cheer you up. {{ Auth::user() ? Auth::user()->name : 'no' }}</span>
+          Let's <span>cheer you up.</span>
         </h1>
         <h2 class="share-story">
         Share your story with us. Read other stories.</h2>
@@ -82,6 +83,5 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="{{ elixir('js/app.js') }}"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   </body>
 </html>
