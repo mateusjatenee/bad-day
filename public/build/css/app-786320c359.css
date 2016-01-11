@@ -6993,6 +6993,13 @@ body {
     font-weight: 300;
     margin: 2rem 0 2rem 0;
   }
+  .hero-banner .container .login_conventionally--link {
+    color: #fff;
+    border-bottom: 2px solid #fff;
+  }
+  .hero-banner .container .login_conventionally--link:hover {
+    text-decoration: none;
+  }
 }
 .btn {
   transition: all 0.2s;
