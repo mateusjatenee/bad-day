@@ -41,11 +41,11 @@
       <div class="container vertical-center">
         <h1 class="display-3 nice-phrase">
           Feeling a little down? <br>
-          Let's <span>cheer you up.</span>
+          Let's <span>cheer you up. {{ Auth::user() ? Auth::user()->name : 'no' }}</span>
         </h1>
         <h2 class="share-story">
         Share your story with us. Read other stories.</h2>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button"><i class="fa fa-facebook"></i> Login with Facebook</a></p>
+        <p><a class="btn btn-primary btn-lg" href="{{ route('facebook.login') }}" role="button"><i class="fa fa-facebook"></i> Login with Facebook</a></p>
       </div>
     </div>
 
