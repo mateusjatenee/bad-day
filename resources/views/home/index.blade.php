@@ -43,8 +43,8 @@
           Feeling a little down? <br>
           Let's <span>cheer you up.</span>
         </h1>
-        <h2>
-        Share your history with us. Read other stories.</h2>
+        <h2 class="share-story">
+        Share your story with us. Read other stories.</h2>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
       </div>
     </div>
