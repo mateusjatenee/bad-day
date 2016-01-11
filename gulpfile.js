@@ -17,7 +17,7 @@ elixir(function(mix) {
     mix.stylus([
   	  'core/app.styl'
   	], './resources/assets/css/app.css')
-    	    .sass('../../../node_modules/bootstrap/scss/bootstrap.scss', './resources/assets/css/bootstrap.css')
+    	    .sass('bootstrap/scss/bootstrap.scss', './resources/assets/css/bootstrap.css')
     	    .styles([
     	    	'bootstrap.css',
      	    	'app.css'
