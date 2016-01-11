@@ -15,6 +15,10 @@ body {
   .hero-banner .container .nice-phrase {
     font-weight: bold;
   }
+  .hero-banner .container .share-story {
+    font-weight: 300;
+    margin: 2rem 0 2rem 0;
+  }
 }
 
 /*# sourceMappingURL=app.css.map */
