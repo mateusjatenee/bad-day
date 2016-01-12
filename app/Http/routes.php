@@ -22,6 +22,11 @@
 |
  */
 
+Route::group(['middleware' => 'api', 'namespace' => 'Api'], function () {
+    Route::get('post/{id}/islikedbyme', 'PostController@isLikedByMe');
+    Route::post('post/like', 'PostController@like');
+});
+
 Route::group(['middleware' => 'web'], function () {
 
     Route::get('/', function () {
