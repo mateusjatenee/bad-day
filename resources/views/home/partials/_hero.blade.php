@@ -11,5 +11,12 @@
     <p><a class="btn btn-primary btn-lg" href="{{ route('facebook.login') }}" role="button"><i class="fa fa-facebook"></i> Login with Facebook</a></p>
     <p><a href="#" class="login_conventionally--link">or login conventionally</a>
     @endif
+
+    <p>
+      <a href="#" class="btn btn-info-outline btn-lg" role="button">Share an awesome story</a>
+      <a href="#" class="btn btn-lg btn-success-outline" role="button">Read awesome stories</a>
+      <a href="#" class="btn btn-lg btn-danger-outline" role="button">Get it off your chest</a>
+    </p>
+
   </div>
 </div>
