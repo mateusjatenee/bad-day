@@ -25,6 +25,8 @@
 Route::group(['middleware' => 'api', 'namespace' => 'Api'], function () {
     Route::get('post/{id}/islikedbyme', 'PostController@isLikedByMe');
     Route::post('post/like', 'PostController@like');
+
+    Route::get('stories/top3', 'PostController@top3');
 });
 
 Route::group(['middleware' => 'web'], function () {
