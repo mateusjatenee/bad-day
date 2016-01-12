@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Post;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -27,5 +28,9 @@ class User extends Authenticatable
     public function likes()
     {
         return $this->belongsToMany('App\Post', 'likes', 'user_id', 'post_id');
+    }
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
     }
 }
