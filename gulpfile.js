@@ -1,6 +1,7 @@
 var elixir = require('laravel-elixir');
 
 require('laravel-elixir-stylus');
+require('laravel-elixir-vueify');
 
 /*
  |--------------------------------------------------------------------------
@@ -22,9 +23,6 @@ elixir(function(mix) {
     	    	'bootstrap.css',
      	    	'app.css'
     	    	], 'public/css/app.css')
-    	    .scripts([
-            'app/app.js',
-            'bootstrap/bootstrap.js'
-            ], 'public/js/app.js')
+    	    .browserify('app/app.js')
           .version(['public/css/app.css', 'public/js/app.js']);
 });
