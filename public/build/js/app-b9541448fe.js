@@ -11284,6 +11284,10 @@ var _Posts = require('./components/Posts.vue');
 
 var _Posts2 = _interopRequireDefault(_Posts);
 
+var _ShareStory = require('./components/ShareStory.vue');
+
+var _ShareStory2 = _interopRequireDefault(_ShareStory);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Vue = require('vue');
@@ -11294,14 +11298,13 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('con
 new Vue({
 	el: 'body',
 
-	components: { Posts: _Posts2.default },
-
-	ready: function ready() {
-		alert('go');
+	components: {
+		Posts: _Posts2.default,
+		Share: _ShareStory2.default
 	}
 });
 
-},{"./components/Posts.vue":28,"vue":26,"vue-resource":15}],28:[function(require,module,exports){
+},{"./components/Posts.vue":28,"./components/ShareStory.vue":29,"vue":26,"vue-resource":15}],28:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11332,12 +11335,60 @@ exports.default = {
 	}
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n  <div class=\"row\">\n  <div class=\"col-md-4\" v-if=\"!loading\" v-for=\"post in posts\">\n    <h2>@{{ post.title }}</h2>\n    <p>@{{ post.content }} </p>\n    <p><a class=\"btn btn-secondary\" href=\"#\" role=\"button\">View details »</a></p>\n  </div>\n</div>\n\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n  <div class=\"row\">\n  <div class=\"col-md-4\" v-if=\"!loading\" v-for=\"post in posts\">\n    <h2>{{ post.title }}</h2>\n    <p>{{ post.content }} </p>\n    <p><a class=\"btn btn-secondary\" href=\"#\" role=\"button\">View details »</a></p>\n  </div>\n</div>\n\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   var id = "/Users/mateus1/Dev/projects/bad-day/resources/assets/js/app/components/Posts.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":26,"vue-hot-reload-api":1}],29:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	data: function data() {
+		return {
+			postData: {
+				title: null,
+				content: null
+			}
+		};
+	},
+	created: function created() {
+		this.getAuth();
+	},
+
+	methods: {
+		sendForm: function sendForm() {
+			var resource = this.$resource('/api/posts');
+			resource.save({ post: this.postData }).then(function (response) {
+				console.log(response);
+			}, function (response) {
+				console.log(response);
+			});
+		},
+		getAuth: function getAuth() {
+			this.$http.get('/api/auth').then(function (response) {
+				this.$set('auth', response.data);
+			});
+		}
+	}
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div id=\"share_story\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"gridModalLabel\" aria-hidden=\"true\">\n   <div class=\"modal-dialog\" role=\"document\">\n     <div class=\"modal-content\">\n       <div class=\"modal-header\">\n         <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">×</span></button>\n         <h4 class=\"modal-title\" id=\"gridModalLabel\">Share a story</h4>\n       </div>\n       <div class=\"modal-body\">\n         <div class=\"container-fluid bd-example-row\">\n           <form v-on=\"submit: sendForm\" v-if=\"auth\">\n             <fieldset class=\"form-group\">\n               <label for=\"formGroupExampleInput\">Title</label>\n               <input type=\"text\" class=\"form-control\" id=\"formGroupExampleInput\" placeholder=\"Post title\" v-model=\"postData.title\">\n             </fieldset>\n             <fieldset class=\"form-group\">\n               <label for=\"formGroupExampleInput2\">Content</label>\n               <input type=\"text\" class=\"form-control\" id=\"formGroupExampleInput2\" placeholder=\"Another input\" v-model=\"postData.content\">\n             </fieldset>\n           </form>\n           <div v-if=\"!auth\">Please login before posting an story. We do this to avoid spam.</div>\n         </div>\n       </div>\n       <div class=\"modal-footer\">\n         <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n         <button type=\"submit\" class=\"btn btn-primary\" @click=\"sendForm()\">Save changes</button>\n       </div>\n     </div>\n   </div>\n </div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "/Users/mateus1/Dev/projects/bad-day/resources/assets/js/app/components/ShareStory.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {

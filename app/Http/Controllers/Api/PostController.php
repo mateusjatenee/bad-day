@@ -38,7 +38,8 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $post = Auth::user()->posts()->create($request->all());
+
+        $post = Auth::user()->posts()->create($request->input('post'));
         return $post;
     }
 

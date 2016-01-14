@@ -37,6 +37,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
     <script src="{{ elixir('js/app.js') }}"></script>
     @yield('scripts')
   </body>

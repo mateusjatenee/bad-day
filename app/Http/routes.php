@@ -26,7 +26,11 @@ Route::group(['middleware' => ['api', 'web'], 'namespace' => 'Api', 'prefix' => 
 
     Route::resource('posts', 'PostController');
     Route::get('auth', function () {
-        return Auth::user();
+        if (Auth::check()) {
+            return response()->json(1);
+        } else {
+            return response()->json(0);
+        }
     });
 });
 
