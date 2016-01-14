@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -15,7 +17,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return Post::latest()->take(3)->get();
+        return Post::orderBy(DB::raw('RAND()'))->take(3)->get();
     }
 
     /**
@@ -36,7 +38,8 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = Auth::user()->posts()->create($request->all());
+        return $post;
     }
 
     /**

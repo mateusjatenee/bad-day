@@ -35,9 +35,10 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.14/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.6.0/vue-resource.js"></script>
-        <script src="{{ elixir('js/app.js') }}"></script>
+    <script src="{{ elixir('js/app.js') }}"></script>
     @yield('scripts')
   </body>
 </html>

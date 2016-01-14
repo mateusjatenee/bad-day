@@ -24,6 +24,7 @@ elixir(function(mix) {
     	    	], 'public/css/app.css')
     	    .scripts([
             'app/app.js',
+            'bootstrap/bootstrap.js'
             ], 'public/js/app.js')
           .version(['public/css/app.css', 'public/js/app.js']);
 });

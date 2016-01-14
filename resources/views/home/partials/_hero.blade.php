@@ -14,7 +14,7 @@
     @endif
 
     <p>
-      <a href="#" class="btn btn-info-outline btn-lg" role="button">Share an awesome story</a>
+      <a href="#" class="btn btn-info-outline btn-lg" role="button" data-toggle="modal" data-target="#share_story">Share an awesome story</a>
       <a href="#" class="btn btn-lg btn-success-outline" role="button">Read awesome stories</a>
       <a href="#" class="btn btn-lg btn-danger-outline" role="button">Get it off your chest</a>
     </p>

@@ -22,9 +22,12 @@
 |
  */
 
-Route::group(['middleware' => 'api', 'namespace' => 'Api', 'prefix' => 'api'], function () {
+Route::group(['middleware' => ['api', 'web'], 'namespace' => 'Api', 'prefix' => 'api'], function () {
 
     Route::resource('posts', 'PostController');
+    Route::get('auth', function () {
+        return Auth::user();
+    });
 });
 
 Route::group(['middleware' => 'web'], function () {

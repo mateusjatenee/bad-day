@@ -1,6 +1,7 @@
 @extends('layouts.base')
 
       @section('content')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Main jumbotron for a primary marketing message or call to action -->
       @include('home.partials._hero')
 
@@ -11,5 +12,5 @@
       <hr>
 
     </div> <!-- /container -->
-
+      @include('home.partials._login_modal')
     @endsection

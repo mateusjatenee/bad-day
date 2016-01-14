@@ -10,5 +10,6 @@
     <li class="nav-item">
       <a class="nav-link" href="#">Contact</a>
     </li>
+    <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
   </ul>
 </nav>
