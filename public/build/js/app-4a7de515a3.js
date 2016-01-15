@@ -11359,7 +11359,8 @@ exports.default = {
 			postData: {
 				title: null,
 				content: null
-			}
+			},
+			loading: false
 		};
 	},
 	created: function created() {
@@ -11369,8 +11370,10 @@ exports.default = {
 	methods: {
 		sendForm: function sendForm() {
 			var resource = this.$resource('/api/posts');
+			this.loading = true;
 			resource.save({ post: this.postData }).then(function (response) {
 				console.log(response);
+				this.loading = false;
 			}, function (response) {
 				console.log(response);
 			});
@@ -11383,7 +11386,7 @@ exports.default = {
 	}
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div id=\"share_story\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"gridModalLabel\" aria-hidden=\"true\">\n   <div class=\"modal-dialog\" role=\"document\">\n     <div class=\"modal-content\">\n       <div class=\"modal-header\">\n         <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">×</span></button>\n         <h4 class=\"modal-title\" id=\"gridModalLabel\">Share a story</h4>\n       </div>\n       <div class=\"modal-body\">\n         <div class=\"container-fluid bd-example-row\">\n           <form v-on=\"submit: sendForm\" v-if=\"auth\">\n             <fieldset class=\"form-group\">\n               <label for=\"formGroupExampleInput\">Title</label>\n               <input type=\"text\" class=\"form-control\" id=\"formGroupExampleInput\" placeholder=\"Post title\" v-model=\"postData.title\">\n             </fieldset>\n             <fieldset class=\"form-group\">\n               <label for=\"formGroupExampleInput2\">Content</label>\n               <input type=\"text\" class=\"form-control\" id=\"formGroupExampleInput2\" placeholder=\"Another input\" v-model=\"postData.content\">\n             </fieldset>\n           </form>\n           <div v-if=\"!auth\">Please login before posting an story. We do this to avoid spam.</div>\n         </div>\n       </div>\n       <div class=\"modal-footer\">\n         <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n         <button type=\"submit\" class=\"btn btn-primary\" @click=\"sendForm()\">Save changes</button>\n       </div>\n     </div>\n   </div>\n </div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div id=\"share_story\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"gridModalLabel\" aria-hidden=\"true\">\n   <div class=\"modal-dialog\" role=\"document\">\n     <div class=\"modal-content\">\n       <div class=\"modal-header\">\n         <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">×</span></button>\n         <h4 class=\"modal-title\" id=\"gridModalLabel\">Share a story</h4>\n       </div>\n       <div class=\"modal-body\">\n         <div class=\"container-fluid bd-example-row\">\n           <form v-on=\"submit: sendForm\" v-if=\"auth\">\n             <fieldset class=\"form-group\">\n               <label for=\"formGroupExampleInput\">Title</label>\n               <input type=\"text\" class=\"form-control\" id=\"formGroupExampleInput\" placeholder=\"Post title\" v-model=\"postData.title\">\n             </fieldset>\n             <fieldset class=\"form-group\">\n               <label for=\"formGroupExampleInput2\">Content</label>\n               <input type=\"text\" class=\"form-control\" id=\"formGroupExampleInput2\" placeholder=\"Another input\" v-model=\"postData.content\">\n             </fieldset>\n           </form>\n           <div v-if=\"!auth\">Please login before posting an story. We do this to avoid spam.</div>\n         </div>\n       </div>\n       <div class=\"modal-footer\">\n         <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n         <button type=\"submit\" class=\"btn btn-primary btn-lg\" @click=\"sendForm()\"><span v-show=\"!loading\">Save changes</span><div class=\"loader\" v-show=\"loading\"></div></button>\n       </div>\n     </div>\n   </div>\n </div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)

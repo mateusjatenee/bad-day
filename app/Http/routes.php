@@ -32,6 +32,9 @@ Route::group(['middleware' => ['api', 'web'], 'namespace' => 'Api', 'prefix' => 
             return response()->json(0);
         }
     });
+
+    Route::post('login', 'AuthController@login');
+
 });
 
 Route::group(['middleware' => 'web'], function () {

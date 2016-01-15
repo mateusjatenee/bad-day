@@ -23,7 +23,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" @click="sendForm()">Save changes</button>
+          <button type="submit" class="btn btn-primary btn-lg" @click="sendForm()"><span v-show="!loading">Save changes</span><div class="loader" v-show="loading"></div></button>
         </div>
       </div>
     </div>
@@ -32,12 +32,14 @@
 
 <script>
 	export default {
+
 		data() {
 			return {
 				postData: {
 					title: null,
 					content: null
-				}
+				},
+				loading: false
 			}
 		},
 
@@ -48,8 +50,10 @@
 		methods: {
 			sendForm() {
 				var resource = this.$resource('/api/posts');
+				this.loading = true;
 				resource.save({post: this.postData }).then(function (response) {
 					console.log(response);
+					this.loading = false;
 				}, function (response) {
 					console.log(response);
 				});
