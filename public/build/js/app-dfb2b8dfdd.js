@@ -11335,7 +11335,7 @@ exports.default = {
 	}
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n  <div class=\"row\">\n  <div class=\"col-md-4\" v-if=\"!loading\" v-for=\"post in posts\">\n    <h2>{{ post.title }}</h2>\n    <p>{{ post.content }} </p>\n    <p><a class=\"btn btn-secondary\" href=\"#\" role=\"button\">View details »</a></p>\n  </div>\n</div>\n\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n\n\n<div class=\"row\">\n\t\t<div class=\"col-md-4 card card-block\" v-for=\"post in posts\">\n\t\t\t<a href=\"{{ post.url }}\">\n\t\t\t<img src=\"{{ post.image_url }}\" alt=\"\" class=\"card-img-top img-fluid\">\n\t\t\t</a>\n\t\t\t<div class=\"card-block\">\n\t\t\t\t<a href=\"{{ post.url }}\"><h4 class=\"card-title\"> {{ post.title }} </h4></a>\n\t\t\t\t<p style=\"font-size: .7rem\">{{ post.url }}</p>\n\t\t\t\t<center><a href=\"{{ post.url }}\" class=\"btn btn-primary btn-lg\">See more</a></center>\n\t\t\t</div>\n\t\t</div>\n</div>\n\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -11358,9 +11358,11 @@ exports.default = {
 		return {
 			postData: {
 				title: null,
-				content: null
+				url: null,
+				image_url: null
 			},
-			loading: false
+			loading: false,
+			getTitleLoading: false
 		};
 	},
 	created: function created() {
@@ -11382,11 +11384,22 @@ exports.default = {
 			this.$http.get('/api/auth').then(function (response) {
 				this.$set('auth', response.data);
 			});
+		},
+		getTitle: function getTitle() {
+			this.getTitleLoading = true;
+			this.$http.post('/api/get-title', { url: this.postData.url }).then(function (response) {
+				console.log(response);
+				this.$set('postData.title', response.data.title);
+				this.$set('postData.image_url', response.data.image_url);
+				this.getTitleLoading = false;
+			}, function (response) {
+				console.log(response);
+			});
 		}
 	}
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div id=\"share_story\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"gridModalLabel\" aria-hidden=\"true\">\n   <div class=\"modal-dialog\" role=\"document\">\n     <div class=\"modal-content\">\n       <div class=\"modal-header\">\n         <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">×</span></button>\n         <h4 class=\"modal-title\" id=\"gridModalLabel\">Share a story</h4>\n       </div>\n       <div class=\"modal-body\">\n         <div class=\"container-fluid bd-example-row\">\n           <form v-on=\"submit: sendForm\" v-if=\"auth\">\n             <fieldset class=\"form-group\">\n               <label for=\"formGroupExampleInput\">Title</label>\n               <input type=\"text\" class=\"form-control\" id=\"formGroupExampleInput\" placeholder=\"Post title\" v-model=\"postData.title\">\n             </fieldset>\n             <fieldset class=\"form-group\">\n               <label for=\"formGroupExampleInput2\">Content</label>\n               <input type=\"text\" class=\"form-control\" id=\"formGroupExampleInput2\" placeholder=\"Another input\" v-model=\"postData.content\">\n             </fieldset>\n           </form>\n           <div v-if=\"!auth\">Please login before posting an story. We do this to avoid spam.</div>\n         </div>\n       </div>\n       <div class=\"modal-footer\">\n         <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n         <button type=\"submit\" class=\"btn btn-primary btn-lg\" @click=\"sendForm()\"><span v-show=\"!loading\">Save changes</span><div class=\"loader\" v-show=\"loading\"></div></button>\n       </div>\n     </div>\n   </div>\n </div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div id=\"share_story\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"gridModalLabel\" aria-hidden=\"true\">\n   <div class=\"modal-dialog\" role=\"document\">\n     <div class=\"modal-content\">\n       <div class=\"modal-header\">\n         <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">×</span></button>\n         <h4 class=\"modal-title\" id=\"gridModalLabel\">Share a story</h4>\n       </div>\n       <div class=\"modal-body\">\n         <div class=\"container-fluid bd-example-row\">\n           <form v-on=\"submit: sendForm\" v-if=\"auth\">\n\n             <fieldset class=\"form-group\">\n             <label for=\"\">URL</label>\n             <input type=\"text\" class=\"form-control\" placeholder=\"URL\" v-model=\"postData.url\">\n             <br>\n\n             <button type=\"button\" class=\"btn btn-lg btn-primary\" @click=\"getTitle\">\n             <span v-show=\"!getTitleLoading\">Get title</span>\n             <span v-show=\"getTitleLoading\">We're on it...</span> \n             <center><div class=\"loader text-center\" v-show=\"getTitleLoading\"></div></center>\n             </button>\n\n             </fieldset>\n             <fieldset class=\"form-group\">\n               <label for=\"formGroupExampleInput\">Title</label>\n               <input type=\"text\" class=\"form-control\" id=\"formGroupExampleInput\" placeholder=\"Post title\" v-model=\"postData.title\">\n             </fieldset>\n           </form>\n           <div v-if=\"!auth\">Please login before posting an story. We do this to avoid spam.</div>\n         </div>\n       </div>\n       <div class=\"modal-footer\">\n         <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n         <button type=\"submit\" class=\"btn btn-primary btn-lg\" @click=\"sendForm()\"><span v-show=\"!loading\">Post it!</span><span v-show=\"loading\">Posting... </span><div class=\"loader\" v-show=\"loading\"></div></button>\n       </div>\n     </div>\n   </div>\n </div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)

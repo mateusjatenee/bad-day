@@ -1,11 +1,18 @@
-<template>
+<template lang="html">
 
-  <div class="row">
-  <div class="col-md-4" v-if="!loading" v-for="post in posts">
-    <h2>{{ post.title }}</h2>
-    <p>{{ post.content }} </p>
-    <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-  </div>
+
+
+<div class="row">
+		<div class="col-md-4 card card-block" v-for="post in posts">
+			<a href="{{ post.url }}">
+			<img src="{{ post.image_url }}" alt="" class="card-img-top img-fluid">
+			</a>
+			<div class="card-block">
+				<a href="{{ post.url }}"><h4 class="card-title"> {{ post.title }} </h4></a>
+				<p style="font-size: .7rem">{{ post.url }}</p>
+				<center><a href="{{ post.url }}" class="btn btn-primary btn-lg">See more</a></center>
+			</div>
+		</div>
 </div>
 
 </template>
