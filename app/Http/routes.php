@@ -33,6 +33,8 @@ Route::group(['middleware' => ['api', 'web'], 'namespace' => 'Api', 'prefix' => 
         }
     });
 
+    Route::post('get-title', 'CrawlerController@getTitle');
+
     Route::post('login', 'AuthController@login');
 
 });
@@ -49,4 +51,5 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('auth/facebook', 'Auth\OAuthController@redirectToProvider')->name('facebook.login');
     Route::get('auth/facebook/callback', 'Auth\OAuthController@handleProviderCallback');
+
 });

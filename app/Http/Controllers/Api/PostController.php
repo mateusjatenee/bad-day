@@ -38,8 +38,6 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        sleep(5);
-        dd($request);
         $post = Auth::user()->posts()->create($request->input('post'));
         return $post;
     }
