@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
+    public function topThree()
+    {
+        return Post::orderBy(DB::raw('RAND()'))->take(3)->get();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +22,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return Post::orderBy(DB::raw('RAND()'))->take(3)->get();
+        return Post::latest()->paginate(20);
     }
 
     /**

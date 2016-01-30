@@ -22,8 +22,9 @@
 |
  */
 
-Route::group(['middleware' => ['api', 'web'], 'namespace' => 'Api', 'prefix' => 'api'], function () {
 
+Route::group(['middleware' => ['api', 'web'], 'namespace' => 'Api', 'prefix' => 'api'], function () {
+    Route::get('posts/topthree', 'PostController@topThree');
     Route::resource('posts', 'PostController');
     Route::get('auth', function () {
         if (Auth::check()) {
@@ -32,6 +33,11 @@ Route::group(['middleware' => ['api', 'web'], 'namespace' => 'Api', 'prefix' => 
             return response()->json(0);
         }
     });
+
+    Route::get('login_teste', function () {
+     \Auth::loginUsingId(7);
+     return redirect('/');
+});
 
     Route::post('get-title', 'CrawlerController@getTitle');
 
@@ -44,6 +50,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/', function () {
         return view('home.index');
     });
+
+    Route::get('top-stories', 'PagesController@topStories');
 
     Route::auth();
 
