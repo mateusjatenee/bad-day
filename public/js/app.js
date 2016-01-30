@@ -11288,6 +11288,10 @@ var _ShareStory = require('./components/ShareStory.vue');
 
 var _ShareStory2 = _interopRequireDefault(_ShareStory);
 
+var _Stories = require('./components/Stories.vue');
+
+var _Stories2 = _interopRequireDefault(_Stories);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Vue = require('vue');
@@ -11300,11 +11304,12 @@ new Vue({
 
 	components: {
 		Posts: _Posts2.default,
-		Share: _ShareStory2.default
+		Share: _ShareStory2.default,
+		Stories: _Stories2.default
 	}
 });
 
-},{"./components/Posts.vue":28,"./components/ShareStory.vue":29,"vue":26,"vue-resource":15}],28:[function(require,module,exports){
+},{"./components/Posts.vue":28,"./components/ShareStory.vue":29,"./components/Stories.vue":30,"vue":26,"vue-resource":15}],28:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11324,7 +11329,7 @@ exports.default = {
 
 	methods: {
 		fetchPosts: function fetchPosts() {
-			this.$http.get('/api/posts').then(function (response) {
+			this.$http.get('/api/posts/topthree').then(function (response) {
 				console.log(response.data);
 				this.$set('posts', response.data);
 				this.loading = false;
@@ -11335,7 +11340,7 @@ exports.default = {
 	}
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n\n\n<div class=\"row\">\n\t\t<div class=\"col-md-4 card card-block\" v-for=\"post in posts\">\n\t\t\t<a href=\"{{ post.url }}\">\n\t\t\t<img src=\"{{ post.image_url }}\" alt=\"\" class=\"card-img-top img-fluid\">\n\t\t\t</a>\n\t\t\t<div class=\"card-block\">\n\t\t\t\t<a href=\"{{ post.url }}\"><h4 class=\"card-title\"> {{ post.title }} </h4></a>\n\t\t\t\t<p style=\"font-size: .7rem\">{{ post.url }}</p>\n\t\t\t\t<center><a href=\"{{ post.url }}\" class=\"btn btn-primary btn-lg\">See more</a></center>\n\t\t\t</div>\n\t\t</div>\n</div>\n\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n\n\n<div class=\"row\">\n\t\t<div class=\"col-md-4 card card-block\" v-for=\"post in posts\">\n\t\t<center>\n\t\t\t<a href=\"{{ post.url }}\">\n\t\t\t<img src=\"{{ post.image_url }}\" alt=\"\" class=\"card-img-top img-fluid\">\n\t\t\t</a>\n\t\t\t<div class=\"card-block\">\n\t\t\t\t<a href=\"{{ post.url }}\"><h4 class=\"card-title\"> {{ post.title }} </h4></a>\n\t\t\t\t<p style=\"font-size: .7rem\">{{ post.url }}</p>\n\t\t\t\t<center><a href=\"{{ post.url }}\" class=\"btn btn-primary btn-lg\">See more</a></center>\n\t\t\t</div>\n\t\t</center>\n\t\t</div>\n</div>\n\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -11376,6 +11381,8 @@ exports.default = {
 			resource.save({ post: this.postData }).then(function (response) {
 				console.log(response);
 				this.loading = false;
+				$('#share_story').modal('hide');
+				this.posts.push(response.data);
 			}, function (response) {
 				console.log(response);
 			});
@@ -11405,6 +11412,48 @@ if (module.hot) {(function () {  module.hot.accept()
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   var id = "/Users/mateus1/Dev/projects/bad-day/resources/assets/js/app/components/ShareStory.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":26,"vue-hot-reload-api":1}],30:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	data: function data() {
+		return {
+			posts: []
+		};
+	},
+	created: function created() {
+		this.loading = true;
+		this.fetchPosts();
+	},
+
+	methods: {
+		fetchPosts: function fetchPosts() {
+			this.$http.get('/api/posts').then(function (response) {
+				console.log(response.data);
+				this.$set('posts', response.data.data);
+				this.loading = false;
+			}, function (response) {
+				console.log(error);
+			});
+		}
+	}
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n<div class=\"row\">\n\t\t<div class=\"col-md-4 card card-block\" v-for=\"post in posts\">\n\t\t<center>\n\t\t\t<a href=\"{{ post.url }}\">\n\t\t\t<img src=\"{{ post.image_url }}\" alt=\"\" class=\"card-img-top img-fluid\">\n\t\t\t</a>\n\t\t\t<div class=\"card-block\">\n\t\t\t\t<a href=\"{{ post.url }}\"><h4 class=\"card-title\"> {{ post.title }} </h4></a>\n\t\t\t\t<p style=\"font-size: .7rem\">{{ post.url }}</p>\n\t\t\t\t<center><a href=\"{{ post.url }}\" class=\"btn btn-primary btn-lg\">See more</a></center>\n\t\t\t</div>\n\t\t</center>\n\t\t</div>\n</div>\n\n\n\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "/Users/mateus1/Dev/projects/bad-day/resources/assets/js/app/components/Stories.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {

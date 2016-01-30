@@ -65,6 +65,8 @@
 				resource.save({post: this.postData }).then(function (response) {
 					console.log(response);
 					this.loading = false;
+					$('#share_story').modal('hide');
+					this.posts.push(response.data);
 				}, function (response) {
 					console.log(response);
 				});

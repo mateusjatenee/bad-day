@@ -1,6 +1,4 @@
-<template lang="html">
-
-
+<template>
 
 <div class="row">
 		<div class="col-md-4 card card-block" v-for="post in posts">
@@ -17,12 +15,12 @@
 		</div>
 </div>
 
+
+
 </template>
 
 <script>
-
 	export default  { 
-		template: '#top-stories',
 		data() {
 			return {
 				posts: []
@@ -36,9 +34,9 @@
 
 		methods: {
 			fetchPosts() {
-				this.$http.get('/api/posts/topthree').then(function(response) {
+				this.$http.get('/api/posts').then(function(response) {
 					console.log(response.data);
-					this.$set('posts', response.data);
+					this.$set('posts', response.data.data);
 					this.loading = false;
 				}, function (response) {
 					console.log(error);
@@ -46,6 +44,5 @@
 			},
 		}
 }
-
 
 </script>

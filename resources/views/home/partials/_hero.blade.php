@@ -2,6 +2,7 @@
   <div class="container vertical-center">
   <h2 class="share-story">
       Feeling a little down{{ Auth::check() ? ', '.Auth::user()->name : '' }}?
+      </h2>
     <h1 class="display-3 nice-phrase">
       Let's <span>cheer you up.</span>
     </h1>
