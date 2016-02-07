@@ -22,22 +22,14 @@
 |
  */
 
-
 Route::group(['middleware' => ['api', 'web'], 'namespace' => 'Api', 'prefix' => 'api'], function () {
     Route::get('posts/topthree', 'PostController@topThree');
     Route::resource('posts', 'PostController');
-    Route::get('auth', function () {
-        if (Auth::check()) {
-            return response()->json(1);
-        } else {
-            return response()->json(0);
-        }
-    });
-
+    Route::post('posts/{id}/report', 'PostController@report');
     Route::get('login_teste', function () {
-     \Auth::loginUsingId(7);
-     return redirect('/');
-});
+        \Auth::loginUsingId(7);
+        return redirect('/');
+    });
 
     Route::post('get-title', 'CrawlerController@getTitle');
 

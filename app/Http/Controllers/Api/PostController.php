@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\Report;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -90,5 +91,19 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function report($id)
+    {
+        if (Report::where('user_id', Auth::user()->id)->where('post_id', $id)->first()) {
+            return response()->json([
+                'message' => 'You have already reported this post.',
+            ], 500);
+        }
+
+        $report = Auth::user()->reports()->create([
+            'post_id' => $id,
+        ]);
+        return $report;
     }
 }

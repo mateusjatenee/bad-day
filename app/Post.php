@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Like;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,10 +12,25 @@ class Post extends Model
 
     public function likes()
     {
-        return $this->belongsToMany('App\User', 'likes');
+        return $this->hasMany(Like::class);
     }
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function report()
+    {
+        return $this->hasMany(Report::class);
+    }
+
+    public function getLikesAttribute()
+    {
+        return $this->likes()->count();
+    }
+
+    public function getReportsAttribute()
+    {
+        return $this->report()->count();
     }
 }
