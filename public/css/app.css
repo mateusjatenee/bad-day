@@ -7097,6 +7097,9 @@ body {
 .pages-banner .page-title {
   font-weight: bold;
 }
+.img-stories {
+  max-height: 400px;
+}
 
 /*# sourceMappingURL=app.css.map */
 

@@ -11278,6 +11278,26 @@ function merge(target, source, deep) {
 
 }));
 },{}],27:[function(require,module,exports){
+var inserted = exports.cache = {}
+
+exports.insert = function (css) {
+  if (inserted[css]) return
+  inserted[css] = true
+
+  var elem = document.createElement('style')
+  elem.setAttribute('type', 'text/css')
+
+  if ('textContent' in elem) {
+    elem.textContent = css
+  } else {
+    elem.styleSheet.cssText = css
+  }
+
+  document.getElementsByTagName('head')[0].appendChild(elem)
+  return elem
+}
+
+},{}],28:[function(require,module,exports){
 'use strict';
 
 var _Posts = require('./components/Posts.vue');
@@ -11292,12 +11312,18 @@ var _Stories = require('./components/Stories.vue');
 
 var _Stories2 = _interopRequireDefault(_Stories);
 
+var _LoadingSpinner = require('./components/LoadingSpinner.vue');
+
+var _LoadingSpinner2 = _interopRequireDefault(_LoadingSpinner);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Vue = require('vue');
 
 Vue.use(require('vue-resource'));
 Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
+
+Vue.component('loading-spinner', _LoadingSpinner2.default);
 
 new Vue({
 	el: 'body',
@@ -11309,7 +11335,25 @@ new Vue({
 	}
 });
 
-},{"./components/Posts.vue":28,"./components/ShareStory.vue":29,"./components/Stories.vue":30,"vue":26,"vue-resource":15}],28:[function(require,module,exports){
+},{"./components/LoadingSpinner.vue":29,"./components/Posts.vue":30,"./components/ShareStory.vue":31,"./components/Stories.vue":32,"vue":26,"vue-resource":15}],29:[function(require,module,exports){
+var __vueify_style__ = require("vueify-insert-css").insert("\n#circularG{\n\tposition:relative;\n\twidth:30px;\n\theight:30px;\n\tmargin: auto;\n}\n\n.circularG{\n\tposition:absolute;\n\tbackground-color:rgb(255,255,255);\n\twidth:7px;\n\theight:7px;\n\tborder-radius:4px;\n\t\t-o-border-radius:4px;\n\t\t-ms-border-radius:4px;\n\t\t-webkit-border-radius:4px;\n\t\t-moz-border-radius:4px;\n\tanimation-name:bounce_circularG;\n\t\t-o-animation-name:bounce_circularG;\n\t\t-ms-animation-name:bounce_circularG;\n\t\t-webkit-animation-name:bounce_circularG;\n\t\t-moz-animation-name:bounce_circularG;\n\tanimation-duration:1.1s;\n\t\t-o-animation-duration:1.1s;\n\t\t-ms-animation-duration:1.1s;\n\t\t-webkit-animation-duration:1.1s;\n\t\t-moz-animation-duration:1.1s;\n\tanimation-iteration-count:infinite;\n\t\t-o-animation-iteration-count:infinite;\n\t\t-ms-animation-iteration-count:infinite;\n\t\t-webkit-animation-iteration-count:infinite;\n\t\t-moz-animation-iteration-count:infinite;\n\tanimation-direction:normal;\n\t\t-o-animation-direction:normal;\n\t\t-ms-animation-direction:normal;\n\t\t-webkit-animation-direction:normal;\n\t\t-moz-animation-direction:normal;\n}\n\n#circularG_1{\n\tleft:0;\n\ttop:12px;\n\tanimation-delay:0.41s;\n\t\t-o-animation-delay:0.41s;\n\t\t-ms-animation-delay:0.41s;\n\t\t-webkit-animation-delay:0.41s;\n\t\t-moz-animation-delay:0.41s;\n}\n\n#circularG_2{\n\tleft:3px;\n\ttop:3px;\n\tanimation-delay:0.55s;\n\t\t-o-animation-delay:0.55s;\n\t\t-ms-animation-delay:0.55s;\n\t\t-webkit-animation-delay:0.55s;\n\t\t-moz-animation-delay:0.55s;\n}\n\n#circularG_3{\n\ttop:0;\n\tleft:12px;\n\tanimation-delay:0.69s;\n\t\t-o-animation-delay:0.69s;\n\t\t-ms-animation-delay:0.69s;\n\t\t-webkit-animation-delay:0.69s;\n\t\t-moz-animation-delay:0.69s;\n}\n\n#circularG_4{\n\tright:3px;\n\ttop:3px;\n\tanimation-delay:0.83s;\n\t\t-o-animation-delay:0.83s;\n\t\t-ms-animation-delay:0.83s;\n\t\t-webkit-animation-delay:0.83s;\n\t\t-moz-animation-delay:0.83s;\n}\n\n#circularG_5{\n\tright:0;\n\ttop:12px;\n\tanimation-delay:0.97s;\n\t\t-o-animation-delay:0.97s;\n\t\t-ms-animation-delay:0.97s;\n\t\t-webkit-animation-delay:0.97s;\n\t\t-moz-animation-delay:0.97s;\n}\n\n#circularG_6{\n\tright:3px;\n\tbottom:3px;\n\tanimation-delay:1.1s;\n\t\t-o-animation-delay:1.1s;\n\t\t-ms-animation-delay:1.1s;\n\t\t-webkit-animation-delay:1.1s;\n\t\t-moz-animation-delay:1.1s;\n}\n\n#circularG_7{\n\tleft:12px;\n\tbottom:0;\n\tanimation-delay:1.24s;\n\t\t-o-animation-delay:1.24s;\n\t\t-ms-animation-delay:1.24s;\n\t\t-webkit-animation-delay:1.24s;\n\t\t-moz-animation-delay:1.24s;\n}\n\n#circularG_8{\n\tleft:3px;\n\tbottom:3px;\n\tanimation-delay:1.38s;\n\t\t-o-animation-delay:1.38s;\n\t\t-ms-animation-delay:1.38s;\n\t\t-webkit-animation-delay:1.38s;\n\t\t-moz-animation-delay:1.38s;\n}\n\n\n\n@keyframes bounce_circularG{\n\t0%{\n\t\t-webkit-transform:scale(1);\n\t\t        transform:scale(1);\n\t}\n\n\t100%{\n\t\t-webkit-transform:scale(.3);\n\t\t        transform:scale(.3);\n\t}\n}\n\n@-o-keyframes bounce_circularG{\n\t0%{\n\t\t-o-transform:scale(1);\n\t}\n\n\t100%{\n\t\t-o-transform:scale(.3);\n\t}\n}\n\n@-ms-keyframes bounce_circularG{\n\t0%{\n\t\t-ms-transform:scale(1);\n\t}\n\n\t100%{\n\t\t-ms-transform:scale(.3);\n\t}\n}\n\n@-webkit-keyframes bounce_circularG{\n\t0%{\n\t\t-webkit-transform:scale(1);\n\t}\n\n\t100%{\n\t\t-webkit-transform:scale(.3);\n\t}\n}\n\n@-moz-keyframes bounce_circularG{\n\t0%{\n\t\t-moz-transform:scale(1);\n\t}\n\n\t100%{\n\t\t-moz-transform:scale(.3);\n\t}\n}\n")
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div id=\"circularG\">\n\t<div id=\"circularG_1\" class=\"circularG\"></div>\n\t<div id=\"circularG_2\" class=\"circularG\"></div>\n\t<div id=\"circularG_3\" class=\"circularG\"></div>\n\t<div id=\"circularG_4\" class=\"circularG\"></div>\n\t<div id=\"circularG_5\" class=\"circularG\"></div>\n\t<div id=\"circularG_6\" class=\"circularG\"></div>\n\t<div id=\"circularG_7\" class=\"circularG\"></div>\n\t<div id=\"circularG_8\" class=\"circularG\"></div>\n</div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "/Users/mateus1/Dev/projects/bad-day/resources/assets/js/app/components/LoadingSpinner.vue"
+  module.hot.dispose(function () {
+    require("vueify-insert-css").cache["\n#circularG{\n\tposition:relative;\n\twidth:30px;\n\theight:30px;\n\tmargin: auto;\n}\n\n.circularG{\n\tposition:absolute;\n\tbackground-color:rgb(255,255,255);\n\twidth:7px;\n\theight:7px;\n\tborder-radius:4px;\n\t\t-o-border-radius:4px;\n\t\t-ms-border-radius:4px;\n\t\t-webkit-border-radius:4px;\n\t\t-moz-border-radius:4px;\n\tanimation-name:bounce_circularG;\n\t\t-o-animation-name:bounce_circularG;\n\t\t-ms-animation-name:bounce_circularG;\n\t\t-webkit-animation-name:bounce_circularG;\n\t\t-moz-animation-name:bounce_circularG;\n\tanimation-duration:1.1s;\n\t\t-o-animation-duration:1.1s;\n\t\t-ms-animation-duration:1.1s;\n\t\t-webkit-animation-duration:1.1s;\n\t\t-moz-animation-duration:1.1s;\n\tanimation-iteration-count:infinite;\n\t\t-o-animation-iteration-count:infinite;\n\t\t-ms-animation-iteration-count:infinite;\n\t\t-webkit-animation-iteration-count:infinite;\n\t\t-moz-animation-iteration-count:infinite;\n\tanimation-direction:normal;\n\t\t-o-animation-direction:normal;\n\t\t-ms-animation-direction:normal;\n\t\t-webkit-animation-direction:normal;\n\t\t-moz-animation-direction:normal;\n}\n\n#circularG_1{\n\tleft:0;\n\ttop:12px;\n\tanimation-delay:0.41s;\n\t\t-o-animation-delay:0.41s;\n\t\t-ms-animation-delay:0.41s;\n\t\t-webkit-animation-delay:0.41s;\n\t\t-moz-animation-delay:0.41s;\n}\n\n#circularG_2{\n\tleft:3px;\n\ttop:3px;\n\tanimation-delay:0.55s;\n\t\t-o-animation-delay:0.55s;\n\t\t-ms-animation-delay:0.55s;\n\t\t-webkit-animation-delay:0.55s;\n\t\t-moz-animation-delay:0.55s;\n}\n\n#circularG_3{\n\ttop:0;\n\tleft:12px;\n\tanimation-delay:0.69s;\n\t\t-o-animation-delay:0.69s;\n\t\t-ms-animation-delay:0.69s;\n\t\t-webkit-animation-delay:0.69s;\n\t\t-moz-animation-delay:0.69s;\n}\n\n#circularG_4{\n\tright:3px;\n\ttop:3px;\n\tanimation-delay:0.83s;\n\t\t-o-animation-delay:0.83s;\n\t\t-ms-animation-delay:0.83s;\n\t\t-webkit-animation-delay:0.83s;\n\t\t-moz-animation-delay:0.83s;\n}\n\n#circularG_5{\n\tright:0;\n\ttop:12px;\n\tanimation-delay:0.97s;\n\t\t-o-animation-delay:0.97s;\n\t\t-ms-animation-delay:0.97s;\n\t\t-webkit-animation-delay:0.97s;\n\t\t-moz-animation-delay:0.97s;\n}\n\n#circularG_6{\n\tright:3px;\n\tbottom:3px;\n\tanimation-delay:1.1s;\n\t\t-o-animation-delay:1.1s;\n\t\t-ms-animation-delay:1.1s;\n\t\t-webkit-animation-delay:1.1s;\n\t\t-moz-animation-delay:1.1s;\n}\n\n#circularG_7{\n\tleft:12px;\n\tbottom:0;\n\tanimation-delay:1.24s;\n\t\t-o-animation-delay:1.24s;\n\t\t-ms-animation-delay:1.24s;\n\t\t-webkit-animation-delay:1.24s;\n\t\t-moz-animation-delay:1.24s;\n}\n\n#circularG_8{\n\tleft:3px;\n\tbottom:3px;\n\tanimation-delay:1.38s;\n\t\t-o-animation-delay:1.38s;\n\t\t-ms-animation-delay:1.38s;\n\t\t-webkit-animation-delay:1.38s;\n\t\t-moz-animation-delay:1.38s;\n}\n\n\n\n@keyframes bounce_circularG{\n\t0%{\n\t\t-webkit-transform:scale(1);\n\t\t        transform:scale(1);\n\t}\n\n\t100%{\n\t\t-webkit-transform:scale(.3);\n\t\t        transform:scale(.3);\n\t}\n}\n\n@-o-keyframes bounce_circularG{\n\t0%{\n\t\t-o-transform:scale(1);\n\t}\n\n\t100%{\n\t\t-o-transform:scale(.3);\n\t}\n}\n\n@-ms-keyframes bounce_circularG{\n\t0%{\n\t\t-ms-transform:scale(1);\n\t}\n\n\t100%{\n\t\t-ms-transform:scale(.3);\n\t}\n}\n\n@-webkit-keyframes bounce_circularG{\n\t0%{\n\t\t-webkit-transform:scale(1);\n\t}\n\n\t100%{\n\t\t-webkit-transform:scale(.3);\n\t}\n}\n\n@-moz-keyframes bounce_circularG{\n\t0%{\n\t\t-moz-transform:scale(1);\n\t}\n\n\t100%{\n\t\t-moz-transform:scale(.3);\n\t}\n}\n"] = false
+    document.head.removeChild(__vueify_style__)
+  })
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":26,"vue-hot-reload-api":1,"vueify-insert-css":27}],30:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11352,7 +11396,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":26,"vue-hot-reload-api":1}],29:[function(require,module,exports){
+},{"vue":26,"vue-hot-reload-api":1}],31:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11418,7 +11462,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":26,"vue-hot-reload-api":1}],30:[function(require,module,exports){
+},{"vue":26,"vue-hot-reload-api":1}],32:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11427,12 +11471,17 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
 	data: function data() {
 		return {
-			posts: []
+			posts: [],
+			logged_in: null
 		};
 	},
+
+	props: ['logged_in'],
+
 	created: function created() {
 		this.loading = true;
 		this.fetchPosts();
+		console.log(this.logged_in);
 	},
 
 	methods: {
@@ -11444,11 +11493,19 @@ exports.default = {
 			}, function (response) {
 				console.log(error);
 			});
+		},
+		reportPost: function reportPost(post) {
+			var resource = this.$resource('/api/posts{/id}/report');
+			this.$http.post('/api/posts/' + post.id + '/report').then(function (data) {
+				console.log(data.data);
+			}, function (data) {
+				console.log(data);
+			});
 		}
 	}
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n<div class=\"row\">\n\t\t<div class=\"col-md-4 card card-block\" v-for=\"post in posts\">\n\t\t<center>\n\t\t\t<a href=\"{{ post.url }}\">\n\t\t\t<img src=\"{{ post.image_url }}\" alt=\"\" class=\"card-img-top img-fluid\">\n\t\t\t</a>\n\t\t\t<div class=\"card-block\">\n\t\t\t\t<a href=\"{{ post.url }}\"><h4 class=\"card-title\"> {{ post.title }} </h4></a>\n\t\t\t\t<p style=\"font-size: .7rem\">{{ post.url }}</p>\n\t\t\t\t<center><a href=\"{{ post.url }}\" class=\"btn btn-primary btn-lg\">See more</a></center>\n\t\t\t</div>\n\t\t</center>\n\t\t</div>\n</div>\n\n\n\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n<div class=\"row\">\n\t\t<div class=\"col-md-4 card card-block\" v-for=\"post in posts\">\n\t\t<center>\n\t\t\t<a href=\"{{ post.url }}\">\n\t\t\t<img src=\"{{ post.image_url }}\" alt=\"\" class=\"card-img-top img-fluid img-stories\">\n\t\t\t</a>\n\t\t\t<div class=\"card-block card-block-bottom\">\n\t\t\t\t<a href=\"{{ post.url }}\"><h4 class=\"card-title\"> {{ post.title }} </h4></a>\n\t\t\t\t<p style=\"font-size: .7rem\">{{ post.url }}</p>\n\t\t\t\t<center><a href=\"{{ post.url }}\" class=\"btn btn-primary btn-lg\">See more</a></center> <br>\n\t\t\t\t<center><button role=\"button\" class=\"btn btn-lg btn-danger\" v-if=\"logged_in\" @click=\"reportPost(post)\">Report</button></center>\n\t\t\t</div>\n\t\t</center>\n\t\t</div>\n</div>\n\n\n\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -11460,6 +11517,6 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":26,"vue-hot-reload-api":1}]},{},[27]);
+},{"vue":26,"vue-hot-reload-api":1}]},{},[28]);
 
 //# sourceMappingURL=app.js.map

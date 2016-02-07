@@ -6,6 +6,9 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('con
 import Posts from './components/Posts.vue';
 import ShareStory from './components/ShareStory.vue';
 import Stories from './components/Stories.vue';
+import LoadingSpinner from './components/LoadingSpinner.vue';
+
+Vue.component('loading-spinner', LoadingSpinner);
 
 new Vue({
 	el: 'body',
